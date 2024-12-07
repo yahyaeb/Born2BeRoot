@@ -123,87 +123,228 @@ You are now in the VM and ready to proceed with further installations.
 ---
 
 ### Step 2: Update and Install Essential Packages
-1. Switch to the root user (`su -`) and update the system with `apt-get update -y` and `apt-get upgrade -y`.
-2. Install the following essential packages:
-   - `sudo`: Enables administrative privileges for non-root users.
-   - `vim`: A lightweight text editor for server management.
-   - `git`: For version control and project management.
-   - `openssh-server`: To enable remote SSH access.
-   - `ufw`: A firewall to secure network access.
-   - `libpam-pwquality`: Ensures password complexity standards.
+
+Run the following commands step-by-step:
+
+1. **Switch to Root User**  
+	To run installations as root, execute: su -
+
+2. **Update and Upgrade Debian**  
+   - Update the system: `apt-get update -y`  
+   - Upgrade the system: `apt-get upgrade -y`  
+
+3. **Install `sudo`**  
+   - Install `sudo`: `apt install sudo -y`  
+   - Check the installed version: `sudo --version`  
+
+4. **Install `vim`**  
+   - Install `vim`: `apt install vim -y`  
+   - Check the installed version: `vim --version`  
+
+5. **Install `git`**  
+   - Install `git`: `apt install git -y`  
+   - Check the installed version: `git --version`  
+
+6. **Install SSH Server**  
+   - Install OpenSSH Server: `apt install openssh-server -y`  
+   - Check the service status: `systemctl status ssh`  
+
+7. **Install UFW (Firewall)**  
+   - Install UFW: `apt install ufw -y`  
+   - Check the installed version: `ufw --version`  
+
+8. **Install Password Quality Checking Library**  
+   - Install the library: `apt-get install libpam-pwquality -y`  
+
+
+	
+### Grant Sudo Permissions
+
+1. **Add Your User to the `sudo` Group**  
+   - Add your user to the `sudo` group: `usermod -aG sudo your_username`  
+   - Verify the group membership: `getent group sudo`  
+
+2. **Edit the `sudoers` File to Grant Full Permissions**  
+   - Open the `sudoers` file: `vim /etc/sudoers`  
+   - Add the following line under `# User privilege specification`:  
+     ```  
+     your_username ALL=(ALL) ALL  
+     ```  
+
+3. **Save and Exit**  
+   - Save the changes and close the file.  
+
+
+### Configure UFW
+
+Assuming you are still working with root access, you can directly type the commands. If not, prepend each command with `sudo`.
+
+1. **Enable UFW**  
+   - Enable the firewall: `ufw enable`  
+
+2. **Check UFW Status**  
+   - View the status of UFW, including allowed rules: `ufw status numbered`  
+
+3. **Allow SSH and Port 4242**  
+   - Allow SSH access: `ufw allow ssh`  
+   - Allow port 4242 (requires port forwarding configuration after this step): `ufw allow 4242`  
+
+4. **Verify Allowed Ports**  
+   - Recheck the UFW rules and allowed ports: `ufw status numbered`  
+
+
+
+### Enable Port Forwarding on VMware Fusion Through Terminal
+
+1. **Edit the NAT Configuration File**  
+   - Open the NAT configuration file:  
+     `sudo vim /Library/Preferences/VMware\ Fusion/vmnet8/nat.conf`  
+
+2. **Add the Port Forwarding Rule**  
+   - Under `[incomingtcp]`, add the following line:  
+     ```  
+     4242 = your_vm_IP_address:22  
+     ```  
+
+3. **Restart VMware Networking**  
+   - Stop VMware networking:  
+     `sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop`  
+   - Start VMware networking:  
+     `sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start`  
+
+   Port forwarding should now be enabled.
+
+4. **Reboot Your VM**  
+   - Reboot your virtual machine to ensure the configuration changes take effect.  
+
+5. **Run Commands with `sudo` After Reboot**  
+   - After rebooting, it is recommended to use `sudo` when running any commands to complete the configuration.  
+
+
+### Configure Password Quality Policy
+
+1. **Edit the PAM Configuration**  
+   - Open the PAM configuration file:  
+     `sudo vim /etc/pam.d/common-password`  
+
+2. **Locate the Line for Password Quality**  
+   - Find this line:  
+     ```  
+     password requisite pam_pwquality.so  
+     ```  
+
+3. **Update the Line with the Following Parameters**  
+   - Add the following to the line:  
+     ```  
+     minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root  
+     ```  
+
+4. **Final Line Should Look Like This**  
+
+
+5. **Save and Exit**  
+
+6. **Edit Login Settings**  
+- Open the login settings file:  
+  `sudo vim /etc/login.defs`  
+
+7. **Locate the Password Aging Section**  
+- Find this section:  
+  ```  
+  PASS_MAX_DAYS 9999  
+  PASS_MIN_DAYS 0  
+  PASS_WARN_AGE 7  
+  ```  
+
+8. **Update the Section to the Following**  
+
+  PASS_MAX_DAYS 30  
+  PASS_MIN_DAYS 2  
+  PASS_WARN_AGE 7  
+
+9. **Reboot the VM**  
+- Reboot the VM to apply the changes:  
+  `sudo reboot`  
+
+10. **Verify Permissions on Newly Created Users**  
+ - Check password aging and restrictions for a user:  
+   `sudo chage -l username`  
+
+11. **Apply the Policy to Existing Users**  
+ - If you need to update the policy for existing users, run:  
+   `sudo chage -m 2 -M 30 -W 7 username`  
+
+
+### Configure Sudo Logs
+
+1. Navigate to your home directory:  
+   - `cd`  
+
+2. Go to the `/var/log` directory:  
+   - `cd /var/log`  
+
+3. Create a new directory for sudo logs:  
+   - `mkdir sudo`  
+
+4. Navigate into the newly created `sudo` directory:  
+   - `cd sudo`  
+
+5. Create the `sudo.log` file:  
+   - `touch sudo.log`  
+
+Done!
+
+
+### Configure the `sudoers` File to Activate Logging
+
+1. **Edit the `sudoers` File**  
+   - Open the file:  
+     `sudo vim /etc/sudoers`  
+
+2. **Locate the Configuration Section**  
+   - Look for the section that says:  
+     ```  
+     See the man page for the details of how to write a sudoers file.  
+     ```  
+
+3. **Remove Existing `Defaults` Statements**  
+   - Remove all pre-written `Defaults` statements in this section.
+
+4. **Paste the Following Configuration**  
+```
+Defaults env_reset
+Defaults mail_badpass
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin"
+Defaults badpass_message="Password is wrong, please try again!"
+Defaults passwd_tries=3
+Defaults logfile="/var/log/sudo/sudo.log"
+Defaults log_input, log_output
+Defaults requiretty
+```
+
+
+5. **Save and Exit**  
 
 ---
 
-### Step 3: Configure Sudo Permissions
-1. Add your user to the `sudo` group with `usermod -aG sudo your_username`.
-2. Verify membership in the `sudo` group using `getent group sudo`.
-3. Edit the `sudoers` file to grant all permissions to your user by adding `your_username ALL=(ALL) ALL` under the `# User privilege specification` section.
+### Disable Root Access Through SSH
 
----
+1. **Edit the SSH Configuration File**  
+- Open the SSH configuration file:  
+  `sudo vim /etc/ssh/sshd_config`  
 
-### Step 4: Configure UFW Firewall
-1. Enable UFW to activate the firewall.
-2. Allow SSH and custom port `4242` for School 42 requirements.
-3. Verify the firewall rules with `ufw status numbered`.
+2. **Locate the `PermitRootLogin` Setting**  
+- Look for the line:  
+  ```  
+  PermitRootLogin  
+  ```  
 
----
+3. **Update the Setting**  
+- Change its value from `Password Required` to `no`:  
+  ```  
+  PermitRootLogin no  
+  ```  
 
-### Step 5: Configure Port Forwarding for VMware Fusion
-1. Edit the NAT configuration file located at `/Library/Preferences/VMware Fusion/vmnet8/nat.conf` to add the following under `[incomingtcp]`: `4242 = your_vm_IP_address:22`.
-3. Restart VMware networking
-	1 - sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
-	2 - sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
-port forwarding should now be enabled.
+4. **Save and Exit**  
 
-By now, I would recommend your reboot your VM to continue with configuring your VM.
-
-After the reboot, I would recommend using sudo to run any commands to complete the configuration.
-
-### Step 6: Configure Password Policies
-1. Type Vim Cd `/etc/pam.d/common-password`
-2. Find this line 
-	"password		requisite		pam_pwquality.so"
-3. Add the following line to it: 
-	"minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root"
-4. the new line should look as follow
-	"password  requisite     pam_pwquality.so  retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root"
-5. save and exit
-6. Edit login settings
-	sudo vim /etc/login.defs
-7. Find this section 
-	PASS_MAX_DAYS 9999 PASS_MIN_DAYS 0 PASS_WARN_AGE 7
-8. update it to 
-	PASS_MAX_DAYS 30 PASS_MIN_DAYS 2 PASS_WARN_AGE 7
-9. sudo reboot, to restart the VM.
-
-To check permissions on newly created users, type the following command: 
-	sudo chage -l username
-Keep in mind that this password policy will apply to newly created users, if needed to update the policy on older users run the following command.
-	sudo chage -m 2 -M 30 -W 7 username
-
-## Configure Sudo Logs
-1. type cd
-2. cd /var/log
-3. mkdir sudo
-4. cd sudo
-5. touch sudo.log
-
-
-Let's now configure the sudoers file to activate our logs file.
-1. sudo vim /etc/sudoers, then edit right below "See the man page for the details of how to write a suoders file.
-remove all the "Defaults" written statements and paste the following:
-
-Defaults	env_reset
-Defaults	mail_badpass
-Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin"
-Defaults	badpass_message="Password is wrong, please try again!"
-Defaults	passwd_tries=3
-Defaults	logfile="/var/log/sudo/sudo.log"
-Defaults	log_input, log_output
-Defaults	requiretty
-
-One more critical step is to disable Root access through SSH.
-1. To do so, login to your VM
-2. type sudo vim /etc/ssh/sshd_config
-3. look for PermitRootLogin and change it from Password Required to no.
-4. save and exit.
+These steps will configure sudo logging and enhance security by disabling root access via SSH.
