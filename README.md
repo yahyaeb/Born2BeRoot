@@ -8,14 +8,14 @@
 
 ## Table of Contents
 
-1. [Introduction](#Introduction)
-2. [Objectives](#Objectives)
+1. [Introduction](#introduction)
+2. [Objectives](#objectives)
 3. [Prerequisites](#prerequisites)
 4. [System Setup](#system-setup)
-5. [Notes](#Notes)
+5. [Notes](#notes)
 6. [Getting Started](#getting-started)
-6. [Testing](#testing)
-8. [Acknowledgements](#Acknowledgements)
+7. [Testing](#testing)
+8. [Acknowledgements](#acknowledgements)
 
 
 ## Introduction
