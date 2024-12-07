@@ -127,7 +127,7 @@ You are now in the VM and ready to proceed with further installations.
 Run the following commands step-by-step:
 
 1. **Switch to Root User**  
-	To run installations as root, execute: su -
+   - To run installations as root, execute: `su -`
 
 2. **Update and Upgrade Debian**  
    - Update the system: `apt-get update -y`  
@@ -241,6 +241,7 @@ Assuming you are still working with root access, you can directly type the comma
 
 4. **Final Line Should Look Like This**  
 
+     ` password requisite pam_pwquality.so minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root  `
 
 5. **Save and Exit**  
 
@@ -248,7 +249,7 @@ Assuming you are still working with root access, you can directly type the comma
 - Open the login settings file:  
   `sudo vim /etc/login.defs`  
 
-7. **Locate the Password Aging Section**  
+7. **Locate the Password Aging Section** 
 - Find this section:  
   ```  
   PASS_MAX_DAYS 9999  
@@ -257,10 +258,11 @@ Assuming you are still working with root access, you can directly type the comma
   ```  
 
 8. **Update the Section to the Following**  
-
+```
   PASS_MAX_DAYS 30  
   PASS_MIN_DAYS 2  
   PASS_WARN_AGE 7  
+```
 
 9. **Reboot the VM**  
 - Reboot the VM to apply the changes:  
@@ -304,7 +306,7 @@ Done!
 2. **Locate the Configuration Section**  
    - Look for the section that says:  
      ```  
-     See the man page for the details of how to write a sudoers file.  
+     #See the man page for the details of how to write a sudoers file.  
      ```  
 
 3. **Remove Existing `Defaults` Statements**  
@@ -348,3 +350,12 @@ Defaults requiretty
 4. **Save and Exit**  
 
 These steps will configure sudo logging and enhance security by disabling root access via SSH.
+
+---
+
+Congratulations you are now done setting up Debian as a server.
+
+---
+*** Acknowledgments ***
+
+I personally made this guide, but I want to give credit to [Pasquale Rossi's Born2BeRoot Guide](https://github.com/pasqualerossi/Born2BeRoot-Guide), which was the inspiration and guide I used to complete this project.
