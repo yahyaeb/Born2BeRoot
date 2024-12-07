@@ -59,7 +59,7 @@ Your VM will now launch.
 4. Select the keyboard language.  
    ![Step 4](https://i.imgur.com/0QWzNX2.png)  
 5. Choose a hostname. If it is for École 42, use your username + "42".  
-   ![Step 5](https://i.imgur.com/rFCIBaV.png)  
+   ![Step 5](https://imgur.com/6mtvsNm.png)  
 6. Click **Enter** to skip the domain name.  
    ![Step 6](https://i.imgur.com/iWAvsXl.png)  
 7. Add a root password and confirm it. **Make sure you write it down!**  
