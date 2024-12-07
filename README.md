@@ -123,62 +123,33 @@ You are now in the VM and ready to proceed with further installations.
 ---
 
 ### Step 2: Update and Install Essential Packages
+1. Switch to the root user (`su -`) and update the system with `apt-get update -y` and `apt-get upgrade -y`.
+2. Install the following essential packages:
+   - `sudo`: Enables administrative privileges for non-root users.
+   - `vim`: A lightweight text editor for server management.
+   - `git`: For version control and project management.
+   - `openssh-server`: To enable remote SSH access.
+   - `ufw`: A firewall to secure network access.
+   - `libpam-pwquality`: Ensures password complexity standards.
 
-Run the following commands step-by-step:
+---
 
-1. Switch to Root User
-	To run installations as root, execute: su -
-2. Update and Upgrade Debian
-	apt-get update -y
-	apt-get upgrade -y
-4. Install sudo
-	apt install sudo -y
-	sudo --version
-5. Install vim
-	apt install vim -y
-	vim --version 
-6. Install git
-	apt install git -y
-	git --version
-7. Install SSH Server
-	apt install openssh-server -y
-	systemctl status ssh
-8. Install UFW (firewall)
-	apt install ufw -y
-	ufw --version 
-8. Install Quality Checking Library
-	apt-get install libpam-pwquality -y
+### Step 3: Configure Sudo Permissions
+1. Add your user to the `sudo` group with `usermod -aG sudo your_username`.
+2. Verify membership in the `sudo` group using `getent group sudo`.
+3. Edit the `sudoers` file to grant all permissions to your user by adding `your_username ALL=(ALL) ALL` under the `# User privilege specification` section.
 
-	
-## Grant Sudo Permissions
-1. Add your user to the sudo group
-	usermod -aG sudo your_username
-	getent group sudo
-2. Edit the sudoers file to grant full permissions
-	vim /etc/sudoers
-Add this under # User privilege specification:
-	your_username ALL=(ALL) ALL
-3. then save and exit.
+---
 
-## Configure UFW
-Assuming that we are still with root access, you can directly type the commands, otherwise start with sudo then add your commands.
-1. Enable UFW
-	ufw enable
-2. Check UFW status
-	ufw status numbered
-3. Allow SSH and port 4242(port forwarding needed after this step)
-	ufw allow ssh
-	ufw allow 4242
-4. Verify allowed ports
-	ufw status numbered
+### Step 4: Configure UFW Firewall
+1. Enable UFW to activate the firewall.
+2. Allow SSH and custom port `4242` for School 42 requirements.
+3. Verify the firewall rules with `ufw status numbered`.
 
+---
 
-## Enable Port Forwarding on VMware Fusion through Terminal:
-
-1. Edit the NAT configuration file
-	sudo vim /Library/Preferences/VMware\ Fusion/vmnet8/nat.conf
-2. Add this under [incomingtcp]:
-	4242 = your_vm_IP_address:22
+### Step 5: Configure Port Forwarding for VMware Fusion
+1. Edit the NAT configuration file located at `/Library/Preferences/VMware Fusion/vmnet8/nat.conf` to add the following under `[incomingtcp]`: `4242 = your_vm_IP_address:22`.
 3. Restart VMware networking
 	1 - sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
 	2 - sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
@@ -188,10 +159,8 @@ By now, I would recommend your reboot your VM to continue with configuring your 
 
 After the reboot, I would recommend using sudo to run any commands to complete the configuration.
 
-Configure Password Quality Policy
-
-1. Edit the PAM configuration:
-	sudo vim /etc/pam.d/common-password
+### Step 6: Configure Password Policies
+1. Type Vim Cd `/etc/pam.d/common-password`
 2. Find this line 
 	"password		requisite		pam_pwquality.so"
 3. Add the following line to it: 
