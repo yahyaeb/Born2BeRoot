@@ -6,6 +6,19 @@
 
 </div>
 
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Objectives](#objectives)
+3. [Prerequisites](#prerequisites)
+4. [Project Overview](#project-overview)
+5. [System Setup](#system-setup)
+6. [System Security](#system-security)
+7. [Testing](#testing)
+8. [Conclusion](#conclusion)
+9. [Resources](#resources)
+
+
 **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
 
 ### Core Learning Objectives and Skills Gained:
@@ -357,6 +370,15 @@ Defaults requiretty
 4. **Save and Exit**  
 
 These steps will configure sudo logging and enhance security by disabling root access via SSH.
+
+---
+
+### Testing
+
+- Verify all user accounts comply with the password policy.
+- Test SSH access using a non-root user.
+- Check disk partitions to ensure LVM is correctly implemented:
+	`lsblk`
 
 ---
 
