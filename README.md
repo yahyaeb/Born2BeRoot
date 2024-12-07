@@ -1,5 +1,5 @@
 # Born2BeRoot
-**Born2BeRoot** is a system administration project designed to introduce students to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
+**Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
 
 ### Core Learning Objectives and Skills Gained:
 - **Virtualization**: Create and configure virtual machines using VirtualBox or UTM.
