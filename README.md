@@ -9,7 +9,7 @@
 ## Table of Contents
 
 1. [Introduction](#Born2BeRoot)
-2. [Objectives](#Core Learning)
+2. [Objectives](#Core)
 3. [Prerequisites](#prerequisites)
 4. [Project Overview](#project-overview)
 5. [System Setup](#system-setup)
