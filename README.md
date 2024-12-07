@@ -37,7 +37,7 @@
 ### Let's Get Started:
 ## Setting Up the Debian ISO Image on VMware
 1. Open VMware and select "Install from disc or image."  
-   ![Step 1](https://imgur.com/ay7XIjD)  
+   ![Step 1](https://i.imgur.com/ay7XIjD.png)
 2. Select the ISO image you downloaded, then click **Continue.**  
    ![Step 2](https://imgur.com/Dvhcys6)  
 3. Click **Finish.**  
