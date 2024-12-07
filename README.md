@@ -1,5 +1,10 @@
-# Born2BeRoot 
-![Logo](https://imgur.com/OLwhOjp.png)  
+<div align="center">
+
+# Born2BeRoot
+
+<img src="https://imgur.com/OLwhOjp.png" alt="Logo" width="150">
+
+</div>
 **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
 
 ### Core Learning Objectives and Skills Gained:
