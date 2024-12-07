@@ -9,7 +9,7 @@
 ## Table of Contents
 
 1. [Introduction](#Introduction)
-2. [Objectives](#Core)
+2. [Objectives](#Objectives)
 3. [Prerequisites](#prerequisites)
 4. [System Setup](#system-setup)
 5. [Notes](#Notes)
