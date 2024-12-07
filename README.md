@@ -65,9 +65,9 @@ Your VM will now launch.
 7. Add a root password and confirm it. **Make sure you write it down!**  
    ![Step 7](https://i.imgur.com/e5gw2nM.png)  
 8. Type a name for the new user.  
-   ![Step 8](https://i.imgur.com/MCfXUu1.png)  
+   ![Step 8](https://imgur.com/DZtcDZ5.png)  
 9. Type a username for your account. **Make sure you write it down!**  
-   ![Step 9](https://i.imgur.com/qcU2zUn.png)  
+   ![Step 9](https://imgur.com/VjI501U.png)  
 10. Add a password and confirm it. **Make sure you write it down!**  
     ![Step 10](https://i.imgur.com/q7BxcGU.png)  
 11. Select your time zone, e.g., **Central.**  
@@ -116,7 +116,7 @@ Your VM will now launch.
    ![Launch Step](https://imgur.com/kvaZ40X.png)  
 
 2. Enter the username and password you set up earlier. Note that the password is not visible as you type, but it is being entered.  
-   ![Login Step](https://imgur.com/R7aKlCd.png)  
+   ![Login Step](https://imgur.com/eCKEtzT.png)  
 
 You are now in the VM and ready to proceed with further installations.
 
