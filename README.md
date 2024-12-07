@@ -2,7 +2,7 @@
 **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
 
 ### Core Learning Objectives and Skills Gained:
-- **Virtualization**: Create and configure virtual machines using VirtualBox or UTM.
+- **Virtualization**: Create and configure virtual machines.
 - **Server Setup**: Install and secure a minimal operating system (Debian or Rocky Linux) without a graphical interface.
 - **System Security**:
   - Enforce strong password policies.
@@ -108,3 +108,107 @@ Your VM will now launch.
     ![Step 27](https://i.imgur.com/SIt2r8j.png)  
 
 **Congratulations! You’ve successfully installed Debian!**
+
+## Installing SSH, UFW, SUDO, VIM, and Other Packages
+
+### Step 1: Launch and Log In
+1. Launch Debian and enter the encryption passphrase you set up earlier.  
+   ![Launch Step](https://imgur.com/kvaZ40X.png)  
+
+2. Enter the username and password you set up earlier. Note that the password is not visible as you type, but it is being entered.  
+   ![Login Step](https://imgur.com/R7aKlCd.png)  
+
+You are now in the VM and ready to proceed with further installations.
+
+---
+
+### Step 2: Update and Install Essential Packages
+
+Run the following commands step-by-step:
+
+1. lets switch user to root to run installations. type 
+	su -
+# Update and Upgrade System Packages
+apt-get update -y
+apt-get upgrade -y
+
+# Install Necessary Packages
+apt install sudo -y  # Install sudo
+sudo --version       # Verify sudo installation
+
+apt install vim -y   # Install vim
+vim --version        # Verify vim installation
+
+apt install git -y   # Install git
+git --version        # Verify git installation
+
+apt install openssh-server -y  # Install SSH server
+systemctl status ssh           # Verify SSH installation
+
+apt install ufw -y    # Install UFW (firewall)
+ufw --version         # Verify UFW installation
+
+apt-get install libpam-pwquality -y  # Install Password Quality Checking library
+
+# Grant User Sudo Permissions
+usermod -aG sudo your_username       # Add user to sudo group
+getent group sudo                    # Verify user is in sudo group
+
+# Edit Sudoers File for Full Permissions
+vim /etc/sudoers
+# Add the following under "# User privilege specification":
+# your_username ALL=(ALL) ALL
+
+# Configure UFW
+ufw enable                          # Enable UFW
+ufw status numbered                 # Check UFW status
+ufw allow ssh                       # Allow SSH
+ufw allow 4242                      # Allow port 4242
+ufw status numbered                 # Verify UFW rules
+
+# Enable Port Forwarding on VMware Fusion
+sudo vim /Library/Preferences/VMware\ Fusion/vmnet8/nat.conf
+# Add this under [incomingtcp]:
+# 4242 = your_vm_IP_address:22
+sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
+sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
+
+# Configure Password Quality Checking Library
+sudo vim /etc/pam.d/common-password
+# Update the line to:
+# password requisite pam_pwquality.so retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxrepeat=3 reject_username difok=7 enforce_for_root
+
+sudo vim /etc/login.defs
+# Update these settings:
+# PASS_MAX_DAYS 30
+# PASS_MIN_DAYS 2
+# PASS_WARN_AGE 7
+
+sudo reboot  # Restart VM
+
+# Check Password Policy for Users
+sudo chage -l username
+# For older users, apply policy:
+sudo chage -m 2 -M 30 -W 7 username
+
+# Configure Sudo Logs
+cd /var/log
+mkdir sudo
+cd sudo
+touch sudo.log
+
+# Edit Sudoers for Logging
+sudo vim /etc/sudoers
+# Replace "Defaults" with the following:
+# Defaults	env_reset
+# Defaults	mail_badpass
+# Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin"
+# Defaults	badpass_message="Password is wrong, please try again!"
+# Defaults	passwd_tries=3
+# Defaults	logfile="/var/log/sudo/sudo.log"
+# Defaults	log_input, log_output
+# Defaults	requiretty
+
+# Disable Root Access via SSH
+sudo vim /etc/ssh/sshd_config
+# Change "PermitRootLogin" from "Password Required" to "no"
