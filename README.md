@@ -8,7 +8,7 @@
 
 ## Table of Contents
 
-1. [Introduction](#introduction)
+1. [Born2BeRoot](#introduction)
 2. [Objectives](#objectives)
 3. [Prerequisites](#prerequisites)
 4. [Project Overview](#project-overview)
