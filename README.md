@@ -8,19 +8,21 @@
 
 ## Table of Contents
 
-1. [Introduction](#Born2BeRoot)
+1. [Introduction](#Introduction)
 2. [Objectives](#Core)
 3. [Prerequisites](#prerequisites)
-4. [Project Overview](#project-overview)
-5. [System Setup](#system-setup)
-6. [System Security](#system-security)
-7. [Testing](#testing)
-8. [Conclusion](#conclusion)
-9. [Acknowledgements](#Acknowledgements)
+4. [System Setup](#system-setup)
+5. [Notes](#Notes)
+6. [Getting_Started](#Getting_Started)
+6. [Testing](#testing)
+8. [Acknowledgements](#Acknowledgements)
 
 
-## **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
+## Introduction
 
+**Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
+
+## Objectives
 ### Core Learning Objectives and Skills Gained:
 - **Virtualization**: Create and configure virtual machines.
 - **Server Setup**: Install and secure a minimal operating system (Debian or Rocky Linux) without a graphical interface.
@@ -46,6 +48,7 @@
 
 ---
 
+## Notes
 ### A Couple of Things to Note:
 - Make sure to write down every username and password you create (documentation is critical in real-world scenarios).
 - You can create any number of users with any names.
@@ -53,7 +56,7 @@
 - The setup may take between **30 to 50 minutes** to complete.
 
 ---
-
+## Getting Started
 ### Let's Get Started:
 ## Setting Up the Debian ISO Image on VMware
 1. Open VMware and select "Install from disc or image."  
