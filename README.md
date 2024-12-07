@@ -13,7 +13,7 @@
 3. [Prerequisites](#prerequisites)
 4. [System Setup](#system-setup)
 5. [Notes](#Notes)
-6. [Getting_Started](#Getting_Started)
+6. [Getting Started](#getting-started)
 6. [Testing](#testing)
 8. [Acknowledgements](#Acknowledgements)
 
