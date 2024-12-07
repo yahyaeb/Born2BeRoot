@@ -1,4 +1,5 @@
-# Born2BeRoot
+# Born2BeRoot 
+![Logo](https://i.imgur.com/ay7XIjD.png)  
 **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
 
 ### Core Learning Objectives and Skills Gained:
@@ -356,6 +357,6 @@ These steps will configure sudo logging and enhance security by disabling root a
 Congratulations you are now done setting up Debian as a server.
 
 ---
-*** Acknowledgments ***
+**Acknowledgements**
 
 I personally made this guide, but I want to give credit to [Pasquale Rossi's Born2BeRoot Guide](https://github.com/pasqualerossi/Born2BeRoot-Guide), which was the inspiration and guide I used to complete this project.
