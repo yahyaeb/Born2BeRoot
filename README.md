@@ -16,7 +16,7 @@
 6. [System Security](#system-security)
 7. [Testing](#testing)
 8. [Conclusion](#conclusion)
-9. [Resources](#resources)
+9. [Acknowledgements](#Acknowledgements)
 
 
 **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
