@@ -5,6 +5,7 @@
 <img src="https://imgur.com/OLwhOjp.png" alt="Logo" width="150">
 
 </div>
+
 **Born2BeRoot** is a system administration project designed as an introduction to the world of virtualization and server management. The goal is to set up a virtual machine (VM) with strict system administration requirements, following specific rules and guidelines.
 
 ### Core Learning Objectives and Skills Gained:
@@ -122,7 +123,7 @@ Your VM will now launch.
    ![Launch Step](https://imgur.com/kvaZ40X.png)  
 
 2. Enter the username and password you set up earlier. Note that the password is not visible as you type, but it is being entered.  
-   ![Login Step](https://imgur.com/eCKEtzT.png)  
+   ![Login Step](https://imgur.com/jffxekz.png)  
 
 You are now in the VM and ready to proceed with further installations.
 
