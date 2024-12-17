@@ -188,11 +188,19 @@ Run the following commands step-by-step:
    - Verify the group membership: `getent group sudo`  
 
 2. **Edit the `sudoers` File to Grant Full Permissions**  
-   - Open the `sudoers` file: `vim /etc/sudoers`  
+   - Type the following command to safely edit the `sudoers` file:
+   `sudo visudo`  
    - Add the following line under `# User privilege specification`:  
      ```  
      your_username ALL=(ALL) ALL  
      ```  
+### ⚠️ **Important Note**  
+Editing the `/etc/sudoers` file directly with `sudo vim /etc/sudoers` is **not recommended** in production environments and is considered bad practice. 
+It can lead to syntax errors that might **lock you out of administrative privileges**.
+
+The safer method is to use the `visudo` command, which checks for syntax errors before saving.
+
+For the sake of this project, you may test editing the file directly. However, always use `visudo` on real servers to avoid misconfigurations.
 
 3. **Save and Exit**  
    - Save the changes and close the file.  
