@@ -206,6 +206,7 @@ For the sake of this project, you may test editing the file directly. However, a
    - Save the changes and close the file.  
 
 
+
 ### Configure UFW
 
 Assuming you are still working with root access, you can directly type the commands. If not, prepend each command with `sudo`.
